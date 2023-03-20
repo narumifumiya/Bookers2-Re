@@ -20,6 +20,9 @@
           <td><%= book.body %></td>
           <!-- いいねボタン追加 -->
           <%= render 'favorites/favorite_btn', book: book %>
+          <!--コメント数表示-->
+          <%= render 'book_comments/count', book: book %>
+          <td>コメント数：<%= book.book_comments.count %></td>
 
         </tr>
       <% end %>

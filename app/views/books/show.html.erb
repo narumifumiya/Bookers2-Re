@@ -17,21 +17,30 @@
               <td>
                 <%= link_to user_path(@book.user_id) do %>
                   <%= image_tag @book.user.get_profile_image(100, 100) %><br>
-                  <%= @book.user.name%>
+                  <%= @book.user.name %>
                 <% end %>
               </td>
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>
               <!-- いいねボタン追加 -->
               <%= render 'favorites/favorite_btn', book: @book %>
+              <!--コメント数表示-->
+              <%= render 'book_comments/count', book: @book %>
 
               <% if @book.user == current_user %>
                 <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
                 <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger" %></td>
               <% end %>
             </tr>
+
         </tbody>
       </table>
+
+      <!-- コメント表示の行-->
+      <%= render 'book_comments/index', book: @book %>
+
+      <!--コメントフォーム-->
+      <%= render 'book_comments/form', book: @book, book_comment: @book_comment %>
     </div>
 
 
