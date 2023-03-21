@@ -9,6 +9,22 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
+  # フォローするユーザーから見た中間テーブル
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+
+  # 中間テーブルrelationshipsを通って、フォローされる側(followed)を集める処理をfollowingsと命名
+  # フォローしているユーザーの情報がわかるようになる
+  # フォロー一覧使用
+  has_many :followings, through: :relationships, source: :followed
+
+  # フォローされているユーザーから見た中間テーブル
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
+  # 中間テーブルreverse_of_relationshipsを通って、フォローする側(follower)を集める処理をfollowersと命名
+  #　フォローされているユーザーの情報がわかるようになる
+  # フォロワー一覧で使用
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
   validates :name, uniqueness: true, length: { minimum: 2, maximum: 20 }
   validates :introduction, length: { maximum: 50 }
 
@@ -18,6 +34,19 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  # フォローした時の処理（引数にはcurrent_userのidを入れる）コントローラーで使用する
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  # フォローを外す時の処理（引数にはcurrent_userのidを入れる）コントローラーで使用する
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  # フォローしているか判定
+  def following?(user)
+    followings.include?(user)
   end
 
 end
