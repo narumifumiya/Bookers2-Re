@@ -49,4 +49,20 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  # user検索時に使用 searchの検索方法によって条件分岐
+  # searchesコントローラーにて使用
+  def self.looks(search, word)
+    if search == "perfect_match"
+      User.where("name Like?", "#{word}")
+    elsif search == "forward_match"
+      User.where("name Like?", "#{word}%")
+    elsif search == "backward_match"
+      User.where("name Like?", "%#{word}")
+    elsif search == "partial_match"
+      User.where("name Like?", "%#{word}%")
+    else
+      User.all
+    end
+  end
+
 end
