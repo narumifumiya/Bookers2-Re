@@ -23,7 +23,9 @@
               <td><%= link_to @book.title, book_path(@book) %></td>
               <td><%= @book.body %></td>
               <!-- いいねボタン追加 -->
-              <%= render 'favorites/favorite_btn', book: @book %>
+              <td id="favorite_btn_<%= @book.id %>">
+                <%= render 'favorites/favorite_btn', book: @book %>
+              </td>
               <!--コメント数表示-->
               <%= render 'book_comments/count', book: @book %>
 
