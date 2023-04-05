@@ -72,8 +72,9 @@
   </header>
 
   <%= render 'searches/form' %>
-
-  <%= flash[:notice] %>
+  <div class="text-success">
+    <%= flash[:notice] %>
+  </div>
 
   <main class="mt-3">
     <%= yield %>
