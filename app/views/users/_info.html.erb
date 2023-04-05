@@ -37,8 +37,11 @@
     <% end %>
   <% end %>
 
-  <div class="mt-5 mb-3">
-  <%= link_to edit_user_path(user) do %>
-    <span class="btn btn-outline-secondary btn-block "><i class="fas fa-user-cog"></i></span>
+  <!-- userの名前がguestuserじゃなければtrueとなり、編集リンクを表示する。つまりゲストユーザーは編集できない-->
+  <% if user.name != "guestuser" %>
+    <div class="mt-5 mb-3">
+    <%= link_to edit_user_path(user) do %>
+      <span class="btn btn-outline-secondary btn-block "><i class="fas fa-user-cog"></i></span>
+    <% end %>
+    </div>
   <% end %>
-  </div>
