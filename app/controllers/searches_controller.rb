@@ -15,5 +15,4 @@ class SearchesController < ApplicationController
       @books = Book.looks(@search, @word)
     end
   end
-
 end

@@ -18,7 +18,6 @@ class BooksController < ApplicationController
       @user = current_user
       render :index
     end
-
   end
 
   def show
@@ -49,16 +48,14 @@ class BooksController < ApplicationController
   end
 
   private
-
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end
-
-  def is_matching_login_user
-    book = Book.find(params[:id])
-    unless book.user.id == current_user.id
-      redirect_to books_path
+    def book_params
+      params.require(:book).permit(:title, :body)
     end
-  end
 
+    def is_matching_login_user
+      book = Book.find(params[:id])
+      unless book.user.id == current_user.id
+        redirect_to books_path
+      end
+    end
 end

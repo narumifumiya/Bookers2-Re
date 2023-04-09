@@ -4,5 +4,4 @@ class Relationship < ApplicationRecord
   # 今回はuserから見てfollower（フォローする人）,followed（フォローされる人）とする
   belongs_to :follower, class_name: "User"
   belongs_to :followed, class_name: "User"
-
 end
