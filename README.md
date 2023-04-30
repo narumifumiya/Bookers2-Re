@@ -19,7 +19,8 @@
 - 引継案件をアップしておくことで、他メンバーが閲覧するだけで内容理解ができる。
 
 ## 設計書
-
+- ER図 https://drive.google.com/file/d/19wfrWchgJAb2XsHTvpFNxcN0yIktKU7C/view?usp=sharing
+- テーブル定義所　https://docs.google.com/spreadsheets/d/1BLu6niklxhqL4gBRvOg0DQrzJsbU5q5M5iIZCcMUGjM/edit?usp=sharing
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
